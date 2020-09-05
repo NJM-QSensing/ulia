@@ -103,7 +103,7 @@ def butter_bandpass_filter(data, low_cutoff, high_cutoff,
                                  sampling_frequency, order=order)
 
 
-class ulia:
+class ULIA:
     def __init__(self, data_size, sampling_frequency,
                  integration_time, order, bandwidth):
         """ Software based lock-in amplifier algorithm.

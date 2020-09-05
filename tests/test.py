@@ -1,13 +1,16 @@
 import numpy as np
 import routines as rt
 import matplotlib.pyplot as plt
+import time
 
-t = np.arange(0, 600)/50
+t = np.arange(0, 800)/50
 r = 0.5 * np.cos(2*np.pi*1.85*t)
 s = 0.2 * np.sin(2*np.pi*1.85*t)
 
-lia = rt.ulia(r.size, 50, 2.5, 2, 0.2)
+start_time = time.time()
+lia = rt.ULIA(r.size, 50, 2.5, 2, 0.2)
 lia.execute(r, s)
+print(f'runtime: {time.time() - start_time}')
 
 print(t.shape)
 print(np.mean(lia.x[200:500]))
