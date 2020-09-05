@@ -1,5 +1,5 @@
 import numpy as np
-import routines as rt
+import ulia.routines as rt
 import matplotlib.pyplot as plt
 import time
 

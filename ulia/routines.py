@@ -24,7 +24,6 @@ SOFTWARE.
 @author: daniel
 """
 import numpy as np
-from numba import jit
 from scipy.signal import butter, lfilter, hilbert
 
 
@@ -105,7 +104,7 @@ def butter_bandpass_filter(data, low_cutoff, high_cutoff,
 
 class ULIA:
     def __init__(self, data_size, sampling_frequency,
-                 integration_time, order, bandwidth):
+                 integration_time, order, bandwidth, harmonic):
         """ Software based lock-in amplifier algorithm.
         data_size -- double - size of modulated datasets
         sampling_frequency -- double - sampling frequency in Hz
@@ -128,6 +127,7 @@ class ULIA:
         self._sampling_frequency = sampling_frequency
         self._integration_time = integration_time
         self._order = order
+        self._harmonic = harmonic
         self._cutoff = 1./self._integration_time
         self._b, self._a = butter(
             self._order, self._cutoff / (0.5 * self._sampling_frequency),
@@ -150,16 +150,21 @@ class ULIA:
             self._order, self._cutoff / (0.5 * self._sampling_frequency),
             btype='low', analog=False)
 
-    # @jit(nopython=True)
     def lock_in(self):
         """ This functions filters the data with a butterworth lowpass filter.
         """
-        self.x[:] = lfilter(self._b, self._a,
-                            np.real(self.avco)*self.signal)
-        self.y[:] = lfilter(self._b, self._a,
-                            np.imag(self.avco)*self.signal)
+        if self._harmonic == 1:
+            self.x[:] = lfilter(self._b, self._a,
+                                np.real(self.avco)*self.signal)
+            self.y[:] = lfilter(self._b, self._a,
+                                np.imag(self.avco)*self.signal)
+        else:
+            reference = np.exp(1j * self._harmonic * aphase)
+            self.x[:] = lfilter(self._b, self._a,
+                                np.real(reference)*self.signal)
+            self.y[:] = lfilter(self._b, self._a,
+                                np.imag(reference)*self.signal)
 
-    # @jit(nopython=True)
     def phase_locked_loop(self):
         """ Phase locked loop function. For every point the phase difference of
         as generated oscillator and the incoming signal is calculated. The
