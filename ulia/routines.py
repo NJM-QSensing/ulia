@@ -25,7 +25,6 @@ SOFTWARE.
 """
 import numpy as np
 from numba import jit
-import bisection_cavity as bc
 from scipy.signal import butter, lfilter, hilbert
 
 
@@ -129,7 +128,6 @@ class ulia:
         self._sampling_frequency = sampling_frequency
         self._integration_time = integration_time
         self._order = order
-        self._bandwidth = bandwidth
         self._cutoff = 1./self._integration_time
         self._b, self._a = butter(
             self._order, self._cutoff / (0.5 * self._sampling_frequency),
@@ -152,16 +150,16 @@ class ulia:
             self._order, self._cutoff / (0.5 * self._sampling_frequency),
             btype='low', analog=False)
 
-    @jit(nopython=True)
+    # @jit(nopython=True)
     def lock_in(self):
         """ This functions filters the data with a butterworth lowpass filter.
         """
         self.x[:] = lfilter(self._b, self._a,
-                            np.real(self.avoc)*self.signal)
+                            np.real(self.avco)*self.signal)
         self.y[:] = lfilter(self._b, self._a,
-                            np.imag(self.avoc)*self.signal)
+                            np.imag(self.avco)*self.signal)
 
-    @jit(nopython=True)
+    # @jit(nopython=True)
     def phase_locked_loop(self):
         """ Phase locked loop function. For every point the phase difference of
         as generated oscillator and the incoming signal is calculated. The
@@ -170,10 +168,19 @@ class ulia:
         bandwidth -- double - bandwidth of the phase locked loop
         """
         # phase locked for loop ;)
-        for i in range(1, self._data_size):
+        for i in np.arange(1, self._data_size):
             phase_diff = np.angle(
                         self.reference[i-1] * np.conj(self.avco[i-1]))
             self.afreq[i] = self.afreq[i-1] + self._bandwidth * phase_diff
             self.aphase[i] = self.aphase[i-1] + self._beta * phase_diff + \
                 self.afreq[i]
             self.avco[i] = np.exp(1j * self.aphase[i])
+
+    def execute(self, reference, signal):
+        """ Execute the lock-in Algorithm
+
+        """
+        self.reference[:] = hilbert(reference)
+        self.signal[:] = signal
+        self.phase_locked_loop()
+        self.lock_in()
