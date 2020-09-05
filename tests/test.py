@@ -5,10 +5,10 @@ import time
 
 t = np.arange(0, 800)/50
 r = 0.5 * np.cos(2*np.pi*1.85*t)
-s = 0.2 * np.sin(2*np.pi*1.85*t)
+s = 0.2 * np.sin(2*np.pi*1.85*2*t)
 
 start_time = time.time()
-lia = rt.ULIA(r.size, 50, 2.5, 2, 0.2)
+lia = rt.ULIA(r.size, 50, 2.5, 2, 0.2, 2)
 lia.execute(r, s)
 print(f'runtime: {time.time() - start_time}')
 

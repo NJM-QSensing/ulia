@@ -104,7 +104,7 @@ def butter_bandpass_filter(data, low_cutoff, high_cutoff,
 
 class ULIA:
     def __init__(self, data_size, sampling_frequency,
-                 integration_time, order, bandwidth, harmonic):
+                 integration_time, order, bandwidth):
         """ Software based lock-in amplifier algorithm.
         data_size -- double - size of modulated datasets
         sampling_frequency -- double - sampling frequency in Hz
@@ -127,7 +127,7 @@ class ULIA:
         self._sampling_frequency = sampling_frequency
         self._integration_time = integration_time
         self._order = order
-        self._harmonic = harmonic
+        self._harmonic = 1
         self._cutoff = 1./self._integration_time
         self._b, self._a = butter(
             self._order, self._cutoff / (0.5 * self._sampling_frequency),
@@ -159,7 +159,7 @@ class ULIA:
             self.y[:] = lfilter(self._b, self._a,
                                 np.imag(self.avco)*self.signal)
         else:
-            reference = np.exp(1j * self._harmonic * aphase)
+            reference = np.exp(1j * self._harmonic * self.aphase)
             self.x[:] = lfilter(self._b, self._a,
                                 np.real(reference)*self.signal)
             self.y[:] = lfilter(self._b, self._a,
@@ -181,11 +181,16 @@ class ULIA:
                 self.afreq[i]
             self.avco[i] = np.exp(1j * self.aphase[i])
 
-    def execute(self, reference, signal):
-        """ Execute the lock-in Algorithm
-
+    def load_data(self, reference, signal):
+        """ Load data into data arrays
         """
         self.reference[:] = hilbert(reference)
         self.signal[:] = signal
+
+    def execute(self, harmonic=1):
+        """ Execute the lock-in Algorithm
+
+        """
+        self._harmonic = harmonic
         self.phase_locked_loop()
         self.lock_in()
