@@ -7,7 +7,7 @@ setuptools.setup(
     name="ulia",
     maintainer="Daniel Uhl",
     maintainer_email="daniel_uhl@hotmail.de",
-    version="1.0.2",
+    version="1.0.3",
     author="Daniel Uhl",
     author_email="daniel_uhl@hotmail.de",
     description="Package contains an algorithm to simulate a lock-in amplifier",
