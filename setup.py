@@ -4,19 +4,20 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="ulia-DanielUhl",
-    version="1.0.0",
+    name="ulia",
+    maintainer="Daniel Uhl",
+    maintainer_email="daniel_uhl@hotmail.de",
+    version="1.0.1",
     author="Daniel Uhl",
     author_email="daniel_uhl@hotmail.de",
-    description="Software based simulation of a Lock-In amplifier.",
+    description="Package contains an algorithm to simulate a lock-in amplifier",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://gitlab.sauerburger.com/saeuble/ulia",
+    url="https://gitlab.com/UhlDaniel/ulia",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent",
     ],
-    python_requires='>=3.6',
+    python_requires=">=3.6",
 )
+
