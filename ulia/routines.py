@@ -103,6 +103,13 @@ def butter_bandpass_filter(data, low_cutoff, high_cutoff,
 
 
 class ULIA:
+    """ Universal Lock-In amplifier
+
+    Attributes
+    ----------
+    + TODO ;)
+    """
+
     def __init__(self, data_size, sampling_frequency,
                  integration_time, order, bandwidth):
         """ Software based lock-in amplifier algorithm.
@@ -136,7 +143,7 @@ class ULIA:
         self._bandwidth = bandwidth
         self._beta = np.sqrt(self._bandwidth)
 
-    def butter_lowpass(cutoff, sampling_frequency, order):
+    def butter_lowpass(self, cutoff, sampling_frequency, order):
         """ This function calculates the parameter for the butterworth
         lowpass filter.
         input:
