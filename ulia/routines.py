@@ -24,7 +24,23 @@ SOFTWARE.
 @author: daniel
 """
 import numpy as np
-from scipy.signal import butter, lfilter, hilbert
+from scipy.signal import butter, lfilter, hilbert, cheby1, sosfilt
+
+
+def cheb_bandpass_filter(data, cutoff, sampling_frequency, order=12):
+    """ This functions filters the data with a Chebyshev 1 bandpass filter.
+    input:
+    data -- numpy.array - containing the data.
+    cutoff -- list or tuple - with the cutoff frequencies of the bandpass
+        filter in Hz.
+    fs -- sampling frequency in Hz.
+    order -- order of the Chebyshev 1 filert.
+    output:
+    data -- numpy.array - filtered data
+    """
+    nyq = 0.5 * sampling_frequency
+    filtered = sosfilt(cheby1(12, 1, cutoff[0]/nyq, 'hp', output='sos'), data)
+    return sosfilt(cheby1(12, 1, cutoff[1]/nyq, 'lp', output='sos'), filtered)
 
 
 def butter_lowpass(cutoff, sampling_frequency, order):
