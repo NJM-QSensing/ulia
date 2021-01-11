@@ -12,6 +12,8 @@ unittest:
 
 pypi_test:
   stage: deployment
+  only: master
+  when: manual
   image: python:3.8
   script:
     - deploy.sh
@@ -23,6 +25,8 @@ pypi_test:
 pypi:
   stage: deployment
   image: python:3.8
+  only: master
+  when: manual
   script:
     - deploy.sh
   environment:
