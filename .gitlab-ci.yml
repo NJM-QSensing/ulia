@@ -1,0 +1,28 @@
+stages:
+  - test
+  - deployment
+
+unittest:
+  stage: test
+  image: python:3.8
+  script:
+    - pip3 install pytest
+    - pytest
+
+pypi_test:
+  stage: deployment
+  image: python:3.8
+  script:
+    - deploy.sh
+  environment:
+    name: PyPI Test
+  variables:
+    TWINE_REPOSITORY_URL: https://test.pypi.org/legacy/
+
+pypi:
+  stage: deployment
+  image: python:3.8
+  script:
+    - deploy.sh
+  environment:
+    name: PyPI

@@ -89,6 +89,7 @@ class RoutinesIntegrationTest(unittest.TestCase):
                                          self.sampling_rate)
         fourier_signal = np.fft.fft(signal)
 
+        print(np.where(fourier_signal == np.max(fourier_signal)))
         self.assertEqual(np.where(fourier_signal == np.max(fourier_signal)), 0)
 
 

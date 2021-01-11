@@ -5,16 +5,21 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="ulia",
+    version="1.0.4",
+    packages=["ulia", "ulia.tests"],
+    package_dir={"ulia", "ulia/tests"},
+    install_requires=['numpy>=1.14', 'scipy>=1.14'],
+    test_suite="ulia.tests",
     maintainer="Daniel Uhl",
     maintainer_email="daniel_uhl@hotmail.de",
-    version="1.0.3",
     author="Daniel Uhl",
     author_email="daniel_uhl@hotmail.de",
-    description="Package contains an algorithm to simulate a lock-in amplifier",
+    description="Algorithm to emulate a lock-in amplifier",
     long_description=long_description,
     long_description_content_type="text/markdown",
+    keywords="lia lock-in amplifier",
+    license="MIT",
     url="https://gitlab.com/UhlDaniel/ulia",
-    packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
@@ -22,4 +27,3 @@ setuptools.setup(
     ],
     python_requires=">=3.6",
 )
-
