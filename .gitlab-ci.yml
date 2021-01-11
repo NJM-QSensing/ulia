@@ -1,6 +1,6 @@
 stages:
   - test
-  - deployment
+  - deploy
 
 unittest:
   stage: test
@@ -10,24 +10,26 @@ unittest:
     - pip3 install pytest
     - pytest
 
-pypi_test:
-  stage: deployment
-  only: master
+################################################################################
+# Deploy
+
+.pypi:base: &pypi_template
+  stage: deploy
+  only:
+    - master
   when: manual
   image: python:3.8
   script:
     - deploy.sh
+
+pypi_test:
+  <<: *pypi_template
   environment:
     name: PyPI Test
   variables:
     TWINE_REPOSITORY_URL: https://test.pypi.org/legacy/
 
 pypi:
-  stage: deployment
-  image: python:3.8
-  only: master
-  when: manual
-  script:
-    - deploy.sh
+  <<: *pypi_template
   environment:
     name: PyPI
