@@ -24,7 +24,7 @@ bdist:
   when: manual
   image: python:3.8
   script:
-    - ci/build_wheel.sh
+    - ci/build_wheels.sh
   artifacts:
     expire_in: 1 week
     paths:
