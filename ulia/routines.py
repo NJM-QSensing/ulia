@@ -24,6 +24,7 @@ SOFTWARE.
 @author: daniel
 """
 import numpy as np
+import numba
 from scipy.signal import butter, lfilter, hilbert, cheby1, sosfilt
 
 
