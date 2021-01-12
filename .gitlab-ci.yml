@@ -10,7 +10,7 @@ base_test:
   stage: test
   image: python:3.8
   script:
-    - pip3 install numpy scipy
+    - pip3 install numpy scipy numba
     - pip3 install pytest
     - pytest
 
