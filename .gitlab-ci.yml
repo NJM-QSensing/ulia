@@ -40,7 +40,7 @@ bdist:
   when: manual
   image: python:3.8
   script:
-    - deploy.sh
+    - ci/deploy.sh
 
 pypi_test:
   <<: *pypi_template

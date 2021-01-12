@@ -1,4 +1,4 @@
 #!/bin/bash
 
 pip install twine
-twine upload --skip-existing --sign dist/*
+python3 -m twine upload --skip-existing --sign dist/*
