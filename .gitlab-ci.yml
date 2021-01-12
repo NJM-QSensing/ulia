@@ -2,7 +2,10 @@ stages:
   - test
   - deploy
 
-unittest:
+################################################################################
+# tests
+
+base_test:
   stage: test
   image: python:3.8
   script:
