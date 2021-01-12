@@ -24,10 +24,11 @@ SOFTWARE.
 @author: daniel
 """
 import numpy as np
-import numba
+from numba import jit
 from scipy.signal import butter, lfilter, hilbert, cheby1, sosfilt
 
 
+@jit(nopython=True)
 def cheb_bandpass_filter(data, cutoff, sampling_frequency, order=12):
     """ This functions filters the data with a Chebyshev 1 bandpass filter.
     input:
@@ -44,6 +45,7 @@ def cheb_bandpass_filter(data, cutoff, sampling_frequency, order=12):
     return sosfilt(cheby1(12, 1, cutoff[1]/nyq, 'lp', output='sos'), filtered)
 
 
+@jit(nopython=True)
 def butter_lowpass(cutoff, sampling_frequency, order):
     """ This function calculates the parameter for the butterworth
     lowpass filter.
@@ -59,6 +61,7 @@ def butter_lowpass(cutoff, sampling_frequency, order):
     return butter(order, norm_cutoff, btype='low', analog=False)
 
 
+@jit(nopython=True)
 def butter_lowpass_filter(data, cutoff, sampling_frequency, order=2):
     """ This functions filters the data with a butterworth lowpass filter.
     input:
@@ -73,6 +76,7 @@ def butter_lowpass_filter(data, cutoff, sampling_frequency, order=2):
     return lfilter(b, a, data)
 
 
+@jit(nopython=True)
 def butter_highpass(cutoff, sampling_frequency, order):
     """ This function calculates the parameter for the butterworth
     highpass filter.
@@ -88,6 +92,7 @@ def butter_highpass(cutoff, sampling_frequency, order):
     return butter(order, norm_cutoff, btype='high', analog=False)
 
 
+@jit(nopython=True)
 def butter_highpass_filter(data, cutoff, sampling_frequency, order):
     """ This functions filters the data with a butterworth highpass filter.
     input:
@@ -102,6 +107,7 @@ def butter_highpass_filter(data, cutoff, sampling_frequency, order):
     return lfilter(b, a, data)
 
 
+@jit(nopython=True)
 def butter_bandpass_filter(data, low_cutoff, high_cutoff,
                            sampling_frequency, order=2):
     """ This functions filters the data with a butterworth highpass filter.
