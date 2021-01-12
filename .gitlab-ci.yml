@@ -1,5 +1,6 @@
 stages:
   - test
+  - build
   - deploy
 
 ################################################################################
@@ -12,6 +13,22 @@ base_test:
     - pip3 install numpy scipy
     - pip3 install pytest
     - pytest
+
+################################################################################
+# Build
+
+bdist:
+  stage: build
+  only:
+    - master
+  when: manual
+  image: python:3.8
+  script:
+    - ci/build_wheel.sh
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - "dist/*"
 
 ################################################################################
 # Deploy
