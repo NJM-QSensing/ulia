@@ -28,7 +28,6 @@ from numba import jit
 from scipy.signal import butter, lfilter, hilbert, cheby1, sosfilt
 
 
-@jit(nopython=True)
 def cheb_bandpass_filter(data, cutoff, sampling_frequency, order=12):
     """ This functions filters the data with a Chebyshev 1 bandpass filter.
     input:
