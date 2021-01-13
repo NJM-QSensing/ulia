@@ -8,7 +8,7 @@ setuptools.setup(
     version="0.3.1",
     packages=["ulia", "ulia.tests"],
     # package_dir={"ulia", "ulia/tests"},
-    install_requires=['numpy>=1.14', 'scipy>=1.4'],
+    install_requires=['numpy>=1.14', 'scipy>=1.4', 'numba>=0.52'],
     test_suite="ulia.tests",
     maintainer="Daniel Uhl",
     maintainer_email="daniel_uhl@hotmail.de",
