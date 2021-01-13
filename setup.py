@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="ulia",
-    version="0.3.1",
+    version="0.3.2",
     packages=["ulia", "ulia.tests"],
     # package_dir={"ulia", "ulia/tests"},
     install_requires=['numpy>=1.14', 'scipy>=1.4'],
