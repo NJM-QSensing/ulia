@@ -39,7 +39,7 @@ def cheb_bandpass_filter(data, cutoff, sampling_frequency, order=12):
     output:
     data -- numpy.array - filtered data
     """
-    sos = cheby1(order, 1, cutoff[1], 'bp',
+    sos = cheby1(order, 1, cutoff, 'bp',
                  fs=sampling_frequency, output='sos')
     return sosfilt(sos, data)
 
@@ -211,7 +211,7 @@ class ULIA:
     def load_data(self, reference, signal):
         """ Load data into data arrays
         """
-        if np.iscompleyobj(reference):
+        if np.iscomplexobj(reference):
             self.reference[:] = reference[:]
         else:
             self.reference[:] = hilbert(reference)[:]
