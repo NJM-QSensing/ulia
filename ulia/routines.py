@@ -131,8 +131,12 @@ def sum_frequency_mixing(a, b):
 
 @jit(nopython=True)
 def diff_frequency_mixing(a, b):
+    """ calculates the difference frequency
+    a -- numpy.array - signal with frequency one.
+    b -- numpy.array - signal with frequency two.
+    """
     return b.real * a.real + b.imag * a.imag\
-            + 1j * (b.imag * a.real - b.real * a.imag)
+           + 1j * (b.imag * a.real - b.real * a.imag)
 
 
 @jit(nopython=True)

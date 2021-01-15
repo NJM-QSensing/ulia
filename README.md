@@ -21,9 +21,10 @@ $ python3 setup.py install
 ```
 
 ### Dependencies
-This package depends on scipy and numpy. In some cases the installation of
-`ulia` fails due to build-time dependencies of numpy or scipy. This can be
-solved by manually installing the two dependencies.
+This package depends on:
+ - Numpy
+ - Scipy
+ - Numba
 
 ## Usage
 
