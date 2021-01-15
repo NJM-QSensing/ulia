@@ -159,7 +159,7 @@ class ULIA:
     """
 
     def __init__(self, data_size, sampling_frequency,
-                 integration_time, order, bandwidth, beta):
+                 integration_time, order, bandwidth):
         """ Software based lock-in amplifier algorithm.
         data_size -- double - size of modulated datasets
         sampling_frequency -- double - sampling frequency in Hz
@@ -187,7 +187,7 @@ class ULIA:
                                           self._order)
         # pll paramters
         self._bandwidth = bandwidth
-        self._beta = beta
+        self._beta = np.sqrt(self._bandwidth)
         # pll output arrays
         self.avco = np.zeros(self._data_size, dtype=np.complex128)
         self.aphase = np.zeros(self._data_size)
