@@ -30,7 +30,7 @@ This package depends on:
 
 ```python
 import numpy as np
-import ulia.routines as rt
+import ulia
 
 
 modulation_frequency = 5000.0
@@ -40,7 +40,7 @@ t = np.arange(0, 0.3*sampling_rate) / sampling_rate
 signal = np.cos(2*np.pi*t*modulation_frequency)
 reference = np.cos(2*np.pi*t*modulation_frequency)
 
-lia = rt.ULIA(signal.size, sampling_rate, 0.03, 2, 0.2)
+lia = ulia.ULIA(signal.size, sampling_rate, 0.03, 2, 0.2)
 lia.load_data(reference, signal)
 lia.execute()
 
