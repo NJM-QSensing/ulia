@@ -121,8 +121,12 @@ def butter_bandpass_filter(data, low_cutoff, high_cutoff,
 
 @jit(nopython=True)
 def sum_frequency_mixing(a, b):
+    """ calculates the sum frequency
+    a -- numpy.array - signal with frequency one.
+    b -- numpy.array - signal with frequency two.
+    """
     return b.real * a.real - b.imag * a.imag\
-            + 1j * (b.imag * a.real + b.real * a.imag)
+           + 1j * (b.imag * a.real + b.real * a.imag)
 
 
 @jit(nopython=True)
