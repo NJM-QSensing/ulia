@@ -39,9 +39,9 @@ def cheb_bandpass_filter(data, cutoff, sampling_frequency, order=12):
     output:
     data -- numpy.array - filtered data
     """
-    nyq = 0.5 * sampling_frequency
-    filtered = sosfilt(cheby1(12, 1, cutoff[0]/nyq, 'hp', output='sos'), data)
-    return sosfilt(cheby1(12, 1, cutoff[1]/nyq, 'lp', output='sos'), filtered)
+    sos = cheby1(order, 1, cutoff[1], 'bp',
+                 fs=sampling_frequency, output='sos')
+    return sosfilt(sos, data)
 
 
 def butter_lowpass(cutoff, sampling_frequency, order):
@@ -120,6 +120,18 @@ def butter_bandpass_filter(data, low_cutoff, high_cutoff,
 
 
 @jit(nopython=True)
+def sum_frequency_mixing(a, b):
+    return b.real * a.real - b.imag * a.imag\
+            + 1j * (b.imag * a.real + b.real * a.imag)
+
+
+@jit(nopython=True)
+def diff_frequency_mixing(a, b):
+    return b.real * a.real + b.imag * a.imag\
+            + 1j * (b.imag * a.real - b.real * a.imag)
+
+
+@jit(nopython=True)
 def phase_locked_loop(data_size, reference, avco, afreq,
                       aphase, bandwidth, beta):
     """ Phase locked loop function. For every point the phase difference of
@@ -147,7 +159,7 @@ class ULIA:
     """
 
     def __init__(self, data_size, sampling_frequency,
-                 integration_time, order, bandwidth):
+                 integration_time, order, bandwidth, beta):
         """ Software based lock-in amplifier algorithm.
         data_size -- double - size of modulated datasets
         sampling_frequency -- double - sampling frequency in Hz
@@ -159,11 +171,12 @@ class ULIA:
         """
         self._data_size = data_size
         self.reference = np.zeros(self._data_size, dtype=np.complex128)
+        complex
         self.signal = np.zeros(self._data_size)
         # lia output data arrays
         self.x = np.zeros(self._data_size)
         self.y = np.zeros(self._data_size)
-        # pll data arrays
+        # lia parameters
         self._sampling_frequency = sampling_frequency
         self._integration_time = integration_time
         self._order = order
@@ -172,33 +185,36 @@ class ULIA:
         self._b, self._a = butter_lowpass(self._cutoff,
                                           self._sampling_frequency,
                                           self._order)
-        # pll data arrays
-        self.afreq = np.ones(self._data_size)
-        self.aphase = np.zeros(self._data_size)
-        self.avco = np.zeros(self._data_size, dtype=np.complex128)
-        # pll variables
+        # pll paramters
         self._bandwidth = bandwidth
-        self._beta = np.sqrt(self._bandwidth)
+        self._beta = beta
+        # pll output arrays
+        self.avco = np.zeros(self._data_size, dtype=np.complex128)
+        self.aphase = np.zeros(self._data_size)
+        self.afreq = np.zeros(self._data_size)
 
     def lock_in(self):
         """ This functions filters the data with a butterworth lowpass filter.
         """
         if self._harmonic == 1:
             self.x[:] = lfilter(self._b, self._a,
-                                np.real(self.avco)*self.signal)
+                                np.real(self.avco)*self.signal)[:]
             self.y[:] = lfilter(self._b, self._a,
-                                np.imag(self.avco)*self.signal)
+                                np.imag(self.avco)*self.signal)[:]
         else:
-            reference = np.exp(1j * self._harmonic * self.aphase)
+            self.reference[:] = np.exp(1j * self._harmonic * self.aphase)[:]
             self.x[:] = lfilter(self._b, self._a,
-                                np.real(reference)*self.signal)
+                                np.real(self.reference)*self.signal)[:]
             self.y[:] = lfilter(self._b, self._a,
-                                np.imag(reference)*self.signal)
+                                np.imag(self.reference)*self.signal)[:]
 
     def load_data(self, reference, signal):
         """ Load data into data arrays
         """
-        self.reference[:] = hilbert(reference)[:]
+        if np.iscompleyobj(reference):
+            self.reference[:] = reference[:]
+        else:
+            self.reference[:] = hilbert(reference)[:]
         self.signal[:] = signal[:]
 
     def execute(self, harmonic=1):
