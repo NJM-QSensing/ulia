@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pip install twine
+pip install twine anybadge
 python3 -m twine upload --skip-existing dist/*
 
 pip install .
