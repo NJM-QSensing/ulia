@@ -39,6 +39,7 @@ badges:
   script:
     - pip install anybadge
     - anybadge -o --color teal -l License -v MIT -f license.svg
+    - anybadge -o --color "#006dad" -l PyPI -v $(python3 -c "import ulia; print(ulia.__version__)") -f pypi.svg
   dependencies: []
   artifacts:
     paths:
