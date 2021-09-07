@@ -1,4 +1,5 @@
-# Universal Software Lock-In Amplifier (ULIA)
+Universal Software Lock-In Amplifier (ULIA)
+===========================================
 
 .. image:: https://gitlab.sauerburger.com/saeuble/ulia/-/jobs/artifacts/master/raw/license.svg?job=badges
         :target: https://gitlab.sauerburger.com/saeuble/ulia/-/blob/master/LICENSE
@@ -9,53 +10,53 @@
 
 An effective algorithm to emulate a Lock-In Amplifier.
 
-## Installation
+Installation
+============
+
 To install `ulia` you can use `pip` or `setuptools`.
 
-### Using `pip`
-`ulia` package can be installed directly from PyPI using `pip` (`pip3`).
+.. code-block:: console
 
-```bash
-$ pip3 install ulia
-```
+  `ulia` package can be installed directly from PyPI using `pip` (`pip3`).
 
-### Using `setuptools`
-It can also be installed directly from this repository.
+or
 
-```bash
-$ git clone https://gitlab.com/UhlDaniel/ulia.git
-$ cd ulia
-$ python3 setup.py install
-```
+.. code-block:: console
 
-### Dependencies
+  $ pip install ulia
+
+
+Dependencies
+************
+
 This package depends on:
  - Numpy
  - Scipy
  - Numba
 
-## Usage
 
-```python
-import numpy as np
-import ulia
+Usage
+-----
 
-
-modulation_frequency = 5000.0
-sampling_rate = 200000.0
-
-t = np.arange(0, 0.3*sampling_rate) / sampling_rate
-signal = np.cos(2*np.pi*t*modulation_frequency)
-reference = np.cos(2*np.pi*t*modulation_frequency)
-
-lia = ulia.ULIA(signal.size, sampling_rate, 0.03, 2, 0.2)
-lia.load_data(reference, signal)
-lia.execute()
+.. code-block:: python
+  >>> import numpy as np
+  >>> import ulia
 
 
-# Ignore the first 30% and last 10% of data due to filter artefacts.
-x = np.mean(lia.x[int(0.3*lia.x.size):int(0.9*lia.x.size)])
-y = np.mean(lia.y[int(0.3*lia.y.size):int(0.9*lia.y.size)])
+  >>> modulation_frequency = 5000.0
+  >>> sampling_rate = 200000.0
 
-print(x + 1j * y)
-```
+  >>> t = np.arange(0, 0.3*sampling_rate) / sampling_rate
+  >>> signal = np.cos(2*np.pi*t*modulation_frequency)
+  >>> reference = np.cos(2*np.pi*t*modulation_frequency)
+
+  >>> lia = ulia.ULIA(signal.size, sampling_rate, 0.03, 2, 0.2)
+  >>> lia.load_data(reference, signal)
+  >>> lia.execute()
+
+
+  >>> # Ignore the first 30% and last 10% of data due to filter artefacts.
+  >>> x = np.mean(lia.x[int(0.3*lia.x.size):int(0.9*lia.x.size)])
+  >>> y = np.mean(lia.y[int(0.3*lia.y.size):int(0.9*lia.y.size)])
+
+  >>> print(x + 1j * y)
