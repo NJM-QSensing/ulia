@@ -27,7 +27,7 @@ or
 
 
 Dependencies
-************
+------------
 
 This package depends on:
  - Numpy
@@ -36,7 +36,9 @@ This package depends on:
 
 
 Usage
------
+=====
+
+Example of how to use the ULIA:
 
 .. code-block:: python
   >>> import numpy as np
