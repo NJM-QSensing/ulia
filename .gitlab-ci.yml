@@ -29,9 +29,7 @@ bdist:
     expire_in: 1 week
     paths:
       - "dist/*"
-    path:
-      - pypi.svg
-    expire_in: never
+
 ################################################################################
 # Badges
 

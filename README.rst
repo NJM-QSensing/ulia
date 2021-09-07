@@ -4,7 +4,7 @@ Universal Software Lock-In Amplifier (ULIA)
 .. image:: https://gitlab.sauerburger.com/saeuble/ulia/-/jobs/artifacts/master/raw/license.svg?job=badges
         :target: https://gitlab.com/saeuble/ulia/-/blob/master/LICENSE
 
-.. image:: https://gitlab.sauerburger.com/saeuble/ulia/-/jobs/artifacts/master/raw/pypi.svg?job=pypi
+.. image:: https://gitlab.sauerburger.com/saeuble/ulia/-/jobs/artifacts/master/raw/dist/pypi.svg?job=pypi
         :target: https://pypi.org/project/ulia/
 
 
