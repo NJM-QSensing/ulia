@@ -10,8 +10,12 @@ Universal Software Lock-In Amplifier (ULIA)
 
 An effective algorithm to emulate a Lock-In Amplifier.
 
+
+Quickstart
+==========
+
 Installation
-============
+------------
 
 To install `ulia` you can use `pip`.
 
@@ -41,7 +45,7 @@ This package depends on:
 
 
 Usage
-=====
+-----
 
 A simple example on how to utilize the ULIA.
 
