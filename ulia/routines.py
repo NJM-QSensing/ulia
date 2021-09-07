@@ -153,8 +153,7 @@ def phase_locked_loop(data_size, reference, avco, afreq,
         phase_diff = np.angle(
             reference[i-1] * np.conj(avco[i-1]))
         afreq[i] = afreq[i-1] + bandwidth * phase_diff
-        aphase[i] = aphase[i-1] + beta * phase_diff + \
-            afreq[i]
+        aphase[i] = aphase[i-1] + beta * phase_diff + afreq[i]
         avco[i] = np.exp(1j * aphase[i])
 
 
@@ -179,7 +178,6 @@ class ULIA:
         """
         self._data_size = data_size
         self.reference = np.zeros(self._data_size, dtype=np.complex128)
-        complex
         self.signal = np.zeros(self._data_size)
         # lia output data arrays
         self.x = np.zeros(self._data_size)
@@ -202,7 +200,10 @@ class ULIA:
         self.afreq = np.zeros(self._data_size)
 
     def lock_in(self):
-        """ This functions filters the data with a butterworth lowpass filter.
+        """ Phase-sensitive detection
+        Demodulation or phase-sensitive detection by first mixing of reference
+        and signal (multiplication of the two ). The mixed signal is than
+        filtered by a butterworth low pass filter.
         """
         if self._harmonic == 1:
             self.x[:] = lfilter(self._b, self._a,
