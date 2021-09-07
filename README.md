@@ -44,8 +44,10 @@ lia = ulia.ULIA(signal.size, sampling_rate, 0.03, 2, 0.2)
 lia.load_data(reference, signal)
 lia.execute()
 
+
+# Ignore the first 30% and last 10% of data due to filter artefacts.
 x = np.mean(lia.x[int(0.3*lia.x.size):int(0.9*lia.x.size)])
 y = np.mean(lia.y[int(0.3*lia.y.size):int(0.9*lia.y.size)])
 
-print(x - 1j * y)
+print(x + 1j * y)
 ```

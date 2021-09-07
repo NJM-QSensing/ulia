@@ -35,9 +35,9 @@ class RoutinesIntegrationTest(unittest.TestCase):
         y = np.mean(lia.y[int(0.3*lia.y.size):int(0.9*lia.y.size)])
 
         # Amplitude
-        self.assertAlmostEqual(np.abs(x-1j*y), 0.5000, places=4)
+        self.assertAlmostEqual(np.abs(x+1j*y), 0.5000, places=4)
         # Phase
-        self.assertAlmostEqual(np.angle(x-1j*y), 0.0, places=4)
+        self.assertAlmostEqual(np.angle(x+1j*y), 0.0, places=4)
 
     def test_demodulate_white_noise_signal(self):
         """
@@ -52,7 +52,7 @@ class RoutinesIntegrationTest(unittest.TestCase):
         x = np.mean(lia.x[int(0.3*lia.x.size):int(0.9*lia.x.size)])
         y = np.mean(lia.y[int(0.3*lia.y.size):int(0.9*lia.y.size)])
 
-        self.assertAlmostEqual(np.abs(x-1j*y), 0.4982, places=4)
+        self.assertAlmostEqual(np.abs(x+1j*y), 0.4982, places=4)
 
     def test_demodulate_noise_frequencies_signal(self):
         """
@@ -71,9 +71,9 @@ class RoutinesIntegrationTest(unittest.TestCase):
         y = np.mean(lia.y[int(0.3*lia.y.size):int(0.9*lia.y.size)])
 
         # Amplitude
-        self.assertAlmostEqual(np.abs(x-1j*y), 0.5000, places=4)
+        self.assertAlmostEqual(np.abs(x+1j*y), 0.5000, places=4)
         # Phase
-        self.assertAlmostEqual(np.angle(x-1j*y), 0.0, places=4)
+        self.assertAlmostEqual(np.angle(x+1j*y), 0.0, places=4)
 
     def test_filter_cherb1_bandpass(self):
         """
