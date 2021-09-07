@@ -71,8 +71,8 @@ A simple example on how to utilize the ULIA.
 
 
 
-  Links
-  =====
+Links
+=====
 
-   * `ULIA on PyPi <https://pypi.org/project/ulia/>`_
-   * `Publication <https://doi.org/10.1063/5.0059740>`_
+ * `ULIA on PyPi <https://pypi.org/project/ulia/>`_
+ * `Publication <https://doi.org/10.1063/5.0059740>`_
