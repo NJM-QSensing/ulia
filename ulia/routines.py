@@ -158,11 +158,9 @@ def phase_locked_loop(data_size, reference, avco, afreq,
 
 
 class ULIA:
-    """ Universal Lock-In amplifier
+    """ Universal Lock-In amplifier (ULIA)
 
-    Attributes
-    ----------
-    + TODO ;)
+    ULIA(data_size, sampling_frequency, integration_time, order, bandwidth)
     """
 
     def __init__(self, data_size, sampling_frequency,
@@ -174,7 +172,7 @@ class ULIA:
         order -- int - order of the butterworth highpass filter
         average -- boolean - if true the lowpass filter is replaced by a simple
                              average function.
-        bandwidth -- bandwidth of the phase locked loop
+        bandwidth -- float - bandwidth of the phase locked loop
         """
         self._data_size = data_size
         self.reference = np.zeros(self._data_size, dtype=np.complex128)
@@ -219,6 +217,8 @@ class ULIA:
 
     def load_data(self, reference, signal):
         """ Load data into data arrays
+        reference -- numpy.array - Array containing the acquired reference.
+        signal -- numpy.array - Array containing the acquired signal.
         """
         if np.iscomplexobj(reference):
             self.reference[:] = reference[:]
@@ -227,8 +227,11 @@ class ULIA:
         self.signal[:] = signal[:]
 
     def execute(self, harmonic=1):
-        """ Execute the lock-in Algorithm
-
+        """ Execute the lock-in Algorithm.
+        Applies the PLL followed by the Lock-In algorithm, mixing and lowpass
+        filter.
+        harmonic -- double - Harmonic of the reference frequency where the
+                             Lock-In algorithm is referenced to.
         """
         self._harmonic = harmonic
         phase_locked_loop(self._data_size, self.reference, self.avco,
