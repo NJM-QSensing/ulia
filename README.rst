@@ -7,6 +7,9 @@ Universal Software Lock-In Amplifier (ULIA)
 .. image:: https://gitlab.sauerburger.com/saeuble/ulia/-/jobs/artifacts/master/raw/pypi.svg?job=base_test
         :target: https://pypi.org/project/ulia/
 
+.. image:: https://img.shields.io/badge/DOI-10.1063%2F5.0059740-blue
+        :target: https://aip.scitation.org/doi/10.1063/5.0059740
+
 
 An effective algorithm to emulate a Lock-In Amplifier.
 
