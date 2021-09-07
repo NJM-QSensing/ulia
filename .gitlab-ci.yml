@@ -31,6 +31,21 @@ bdist:
       - "dist/*"
 
 ################################################################################
+# Badges
+
+badges:
+  image: python:3.7
+  stage: build
+  script:
+    - pip install anybadge
+    - anybadge -o --color teal -l License -v MIT -f license.svg
+  dependencies: []
+  artifacts:
+    paths:
+      - "*.svg"
+    expire_in: never
+
+################################################################################
 # Deploy
 
 .pypi:base: &pypi_template
