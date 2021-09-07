@@ -15,9 +15,12 @@ Installation
 
 To install `ulia` you can use `pip` or `setuptools`.
 
+
+`ulia` package can be installed directly from PyPI using `pip` (`pip3`).
+
 .. code-block:: console
 
-  `ulia` package can be installed directly from PyPI using `pip` (`pip3`).
+  pip install git+https://gitlab.com/UhlDaniel/ulia.git
 
 or
 
@@ -38,9 +41,10 @@ This package depends on:
 Usage
 =====
 
-Example of how to use the ULIA:
+Example on how to use the ULIA:
 
 .. code-block:: python
+
   >>> import numpy as np
   >>> import ulia
 
