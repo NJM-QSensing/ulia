@@ -13,7 +13,7 @@ An effective algorithm to emulate a Lock-In Amplifier.
 Installation
 ============
 
-To install `ulia` you can use `pip` or `setuptools`.
+To install `ulia` you can use `pip`.
 
 
 `ulia` package can be installed directly from PyPI using `pip` (`pip3`).
@@ -43,7 +43,7 @@ This package depends on:
 Usage
 =====
 
-Example on how to use the ULIA:
+A simple example on how to utilize the ULIA.
 
 .. code-block:: python
 
@@ -68,3 +68,11 @@ Example on how to use the ULIA:
   >>> y = np.mean(lia.y[int(0.3*lia.y.size):int(0.9*lia.y.size)])
 
   >>> print(x + 1j * y)
+
+
+
+  Links
+  =====
+
+   * `ULIA on PyPi <https://pypi.org/project/ulia/>`_
+   * `Publication <https://doi.org/10.1063/5.0059740>`_
