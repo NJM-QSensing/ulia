@@ -20,7 +20,7 @@ To install `ulia` you can use `pip` or `setuptools`.
 
 .. code-block:: console
 
-  pip install git+https://gitlab.com/UhlDaniel/ulia.git
+  $ pip install git+https://gitlab.com/UhlDaniel/ulia.git
 
 or
 
@@ -33,9 +33,11 @@ Dependencies
 ------------
 
 This package depends on:
+
  - Numpy
  - Scipy
  - Numba
+
 
 
 Usage
