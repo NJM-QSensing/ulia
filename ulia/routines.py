@@ -223,7 +223,7 @@ class ULIA:
         if np.iscomplexobj(reference):
             self.reference[:] = reference[:]
         else:
-            self.reference[:] = hilbert(reference)[:]
+            self.reference[:] = np.conj(hilbert(reference))[:]
         self.signal[:] = signal[:]
 
     def execute(self, harmonic=1):
