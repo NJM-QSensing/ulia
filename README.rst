@@ -3,7 +3,6 @@
 .. image:: https://gitlab.sauerburger.com/saeuble/ulia/-/jobs/artifacts/master/raw/license.svg?job=badges
         :target: https://gitlab.sauerburger.com/saeuble/ulia/-/blob/master/LICENSE
 
-
 .. image:: https://gitlab.sauerburger.com/saeuble/ulia/-/jobs/artifacts/master/raw/pypi.svg?job=pypi
         :target: https://pypi.org/project/ulia/
 
