@@ -72,6 +72,10 @@ class RoutinesIntegrationTest(unittest.TestCase):
 
         # Amplitude
         self.assertAlmostEqual(np.abs(x+1j*y), 0.5000, places=4)
+        # Real
+        self.assertAlmostEqual(np.real(x+1j*y), 0.5000, places=4)
+        # Imag
+        self.assertAlmostEqual(y, 0.0, places=4)
         # Phase
         self.assertAlmostEqual(np.angle(x+1j*y), 0.0, places=4)
 

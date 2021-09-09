@@ -206,14 +206,14 @@ class ULIA:
         if self._harmonic == 1:
             self.x[:] = lfilter(self._b, self._a,
                                 np.real(self.avco)*self.signal)[:]
-            self.y[:] = lfilter(self._b, self._a,
-                                np.imag(self.avco)*self.signal)[:]
+            self.y[:] = -lfilter(self._b, self._a,
+                                 np.imag(self.avco)*self.signal)[:]
         else:
             self.reference[:] = np.exp(1j * self._harmonic * self.aphase)[:]
             self.x[:] = lfilter(self._b, self._a,
                                 np.real(self.reference)*self.signal)[:]
-            self.y[:] = lfilter(self._b, self._a,
-                                np.imag(self.reference)*self.signal)[:]
+            self.y[:] = -lfilter(self._b, self._a,
+                                 np.imag(self.reference)*self.signal)[:]
 
     def load_data(self, reference, signal):
         """ Load data into data arrays
@@ -223,7 +223,7 @@ class ULIA:
         if np.iscomplexobj(reference):
             self.reference[:] = reference[:]
         else:
-            self.reference[:] = np.conj(hilbert(reference))[:]
+            self.reference[:] = hilbert(reference)[:]
         self.signal[:] = signal[:]
 
     def execute(self, harmonic=1):

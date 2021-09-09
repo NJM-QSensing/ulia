@@ -13,12 +13,6 @@ base_test:
     - pip3 install numpy scipy numba
     - pip3 install pytest
     - pytest
-    - pip3 install anybadge
-    - anybadge -o --color "#006dad" -l PyPI -v $(python3 -c "import ulia; print(ulia.__version__)") -f pypi.svg
-  artifacts:
-    paths:
-      - "*.svg"
-    expire_in: never
 
 ################################################################################
 # Build
@@ -74,3 +68,7 @@ pypi:
   <<: *pypi_template
   environment:
     name: PyPI
+  artifacts:
+    paths:
+      - "*.svg"
+    expire_in: never
