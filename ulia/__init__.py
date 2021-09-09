@@ -6,4 +6,4 @@ from .routines import diff_frequency_mixing
 from .routines import sum_frequency_mixing
 
 
-__version__ = '2021.09.2'
+__version__ = '2021.09.3'

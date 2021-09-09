@@ -36,6 +36,7 @@ bdist:
 badges:
   image: python:3.7
   stage: build
+  when: manual
   script:
     - pip install anybadge
     - anybadge -o --color teal -l License -v MIT -f license.svg

@@ -70,7 +70,7 @@ A simple example on how to utilize the ULIA.
   >>> lia.execute()
 
 
-  >>> # Ignore the first 30% and last 10% of data due to filter artefacts.
+  Ignore the first 30% and last 10% of data due to filter artefacts.
   >>> x = np.mean(lia.x[int(0.3*lia.x.size):int(0.9*lia.x.size)])
   >>> y = np.mean(lia.y[int(0.3*lia.y.size):int(0.9*lia.y.size)])
 
