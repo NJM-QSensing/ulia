@@ -15,7 +15,6 @@ setuptools.setup(
     author_email="daniel_uhl@hotmail.de",
     description="Algorithm to emulate a lock-in amplifier",
     long_description=long_description,
-    long_description_content_type="text/markdown",
     keywords="lia lock-in amplifier",
     license="MIT",
     url="https://gitlab.com/UhlDaniel/ulia",
