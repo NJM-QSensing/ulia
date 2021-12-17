@@ -21,7 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-@author: daniel
+@author: Daniel Uhl
 """
 import numpy as np
 from numba import jit
@@ -195,7 +195,7 @@ class ULIA:
         # pll output arrays
         self.avco = np.zeros(self._data_size, dtype=np.complex128)
         self.aphase = np.zeros(self._data_size)
-        self.afreq = np.zeros(self._data_size)
+        self.afreq = np.ones(self._data_size)
 
     def lock_in(self):
         """ Phase-sensitive detection
